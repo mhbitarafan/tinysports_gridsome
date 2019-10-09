@@ -30,12 +30,12 @@
             <div class="flex-grow-1"></div>
             <v-btn
               text
-              href="http://localhost/laravel/login"
+              href="http://v2.tinysports.ir/login"
               target="_self"
             >ورود</v-btn>
             <v-btn
               text
-              href="http://localhost/laravel/register"
+              href="http://v2.tinysports.ir/register"
               target="_self"
             >ثبت نام</v-btn>
           </v-app-bar>

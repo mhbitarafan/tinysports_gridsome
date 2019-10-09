@@ -21,3 +21,6 @@ a {
 main {
   background-color: #f2f0ff;
 }
+.v-btn {
+  font-size: 1rem !important;
+}
