@@ -26,13 +26,21 @@ module.exports = function(api) {
 
     const axios = require('axios')
     api.loadSource( async actions => {
-      const collection = actions.addCollection({typeName: 'Order'});   
-      const orders = await axios('http://localhost/laravel/api/orders');
-      const data = orders.data.data;
-      for(const order of data){
+      const collection = actions.addCollection({typeName: 'Products'});   
+      const products = await axios('http://localhost/laravel/api/products');
+      const data = products.data;
+      for(const product of data){
         collection.addNode({
-          id: order.id,
-          phone: order.phone
+          id: product.id,
+          title: product.title,
+          slug: product.slug,
+          short_description: product.short_description,
+          description: product.description,
+          price: product.price,
+          discount_price: product.discount_price,
+          image: product.image,
+          attributes: product.attributes,
+          created_at: product.created_at
         })
       }
     });

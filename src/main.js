@@ -4,9 +4,17 @@ import DefaultLayout from '~/layouts/Default.vue'
 import vuetify from '@/plugins/vuetify'
 import '~/assets/sass/main.scss'
 
+
 export default function (Vue, { head, appOptions }) {
   head.htmlAttrs = { lang: 'fa', dir: 'rtl' }
   appOptions.vuetify = vuetify
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
+  Vue.mixin({
+    methods: {
+      numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u2009,\u202F");
+    }
+    },
+  })
 }
