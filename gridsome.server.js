@@ -15,18 +15,19 @@ module.exports = function(api) {
     const axios = require('axios')
     api.loadSource( async actions => {
       const collection = actions.addCollection({typeName: 'Products'});   
-      const products = await axios('http://v2.tinysports.ir/api/products');
-      const data = products.data;
+      const products = await axios('http://localhost/laravel/api/products');
+      const data = products.data.data;
       for(const product of data){
         collection.addNode({
           id: product.id,
-          title: product.title,
-          slug: product.slug,
+          name: product.name,
+          second_name: product.second_name,
           short_description: product.short_description,
           description: product.description,
           price: product.price,
           discount_price: product.discount_price,
           image: product.image,
+          stock_status: product.stock_status,
           attributes: product.attributes,
           created_at: product.created_at
         })

@@ -1,9 +1,9 @@
 <template>
-  <div class="text-center">
+  <div class="text-center my-6">
     <v-pagination
       v-model="page"
       :length="totalPages"
-      total-visible=5
+      total-visible=7
       @input="paginate"
     ></v-pagination>
   </div>
@@ -15,6 +15,7 @@ export default {
   props: ["info"],
   data() {
     return {
+      main_page: '',
       page: 1,
       totalPage: 0
     };
@@ -23,8 +24,14 @@ export default {
     this.page = this.info.currentPage;
     this.totalPages = this.info.totalPages
   },
+  updated() {
+    this.main_page = this.page;
+  },
   methods: {
       paginate(){
+          if (this.main_page == this.page) {
+            return;
+          }
           if (this.page == 1){
               this.$router.push('.');
               return;
