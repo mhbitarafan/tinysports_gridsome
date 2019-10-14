@@ -15,7 +15,7 @@ module.exports = function(api) {
     const axios = require('axios')
     api.loadSource( async actions => {
       const collection = actions.addCollection({typeName: 'Products'});   
-      const products = await axios('http://localhost/laravel/api/products');
+      const products = await axios(`http://localhost/laravel/api/products`);
       const data = products.data.data;
       for(const product of data){
         collection.addNode({

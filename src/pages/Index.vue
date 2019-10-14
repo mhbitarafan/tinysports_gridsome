@@ -1,5 +1,4 @@
 <template>
-  <Layout>
     <v-container>
       <v-row align="center">
         <v-col
@@ -13,7 +12,6 @@
         </v-col>
       </v-row>
     </v-container>
-  </Layout>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center my-6">
+  <div class="pagination text-center my-4 pa-2 grey lighten-1">
     <v-pagination
       v-model="page"
       :length="totalPages"
@@ -42,5 +42,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.v-pagination__item {
+    outline: 0;
+}
+.pagination {
+  border-radius: 4px
+}
 </style>
