@@ -1,9 +1,9 @@
 <template>
 <layout v-infinite-scroll="loadMore">
-    <v-row class="px-6" justify="center">
+    <v-row class="fill-height px-6" justify="center">
         <v-col cols="12">
             <v-row>
-                <v-col v-for="(item, index) in $page.allProduct.edges" :key="index" cols="12" sm="6" md="4" lg="3" xl="2">
+                <v-col v-for="item in $page.allProduct.edges" :key="item.node.id" cols="12" sm="6" md="4" lg="3" xl="2">
                     <g-link :to="'/product/'+item.node.id">
                         <v-hover v-slot:default="{ hover }">
                             <v-card :dark="$store.state.dark_mode" :elevation="hover ? 6 : 2">
@@ -19,6 +19,7 @@
                                 </div>
                             </v-card>
                         </v-hover>
+
                     </g-link>
                 </v-col>
             </v-row>
@@ -28,20 +29,24 @@
 </template>
 
 <page-query>
-query Products($page: Int){
-  allProduct(perPage: 24, page: $page) @paginate {
-    totalCount  
+query ($cat: [String], $page: Int) 
+{
+  allProduct(filter: { categories: {contains: $cat }}, perPage: 8, page: $page) @paginate {
+    totalCount
     pageInfo {
       totalPages
       currentPage
     }
-    edges {
-      node {
+    edges{
+      node{
         id,
         name,
         second_name,
         price,
         image,
+        attributes,
+        short_description,
+        description,
         stock_status
       }
     }
@@ -66,10 +71,13 @@ export default {
             } = this.$route.params;
             if (page >= totalPages) return;
             if (page) {
-                const nextPage = parseInt(page) + 1 ;
+                const nextPage = parseInt(page) + 1;
                 this.$router.push(`${nextPage}`)
             } else {
-                this.$router.push(`/products/2`)
+                var currRoute = this.$router.currentRoute.fullPath;
+                const lastindex = currRoute.lastIndexOf("/");
+                const cat = currRoute.substring(lastindex);
+                this.$router.push(`./${cat}/2`)
             }
         }
     },
@@ -99,17 +107,5 @@ export default {
     height: 200px;
     object-fit: contain;
 
-}
-
-.scroller {
-    height: 100%;
-    width: 100%;
-}
-
-.user {
-    height: 100%;
-    padding: 0 12px;
-    display: flex;
-    align-items: center;
 }
 </style>

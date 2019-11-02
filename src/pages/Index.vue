@@ -7,7 +7,7 @@
         >
           <v-btn
             color="white"
-            to="/products/"
+            to="/products"
           >لیست همه محصولات</v-btn>
         </v-col>
       </v-row>

@@ -6,20 +6,27 @@
 
 module.exports = {
   siteName: 'تاینی اسپرت',
-  transformers: {
-    remark: {}
-  },
-  plugins: [
-    {
-      use: '@gridsome/plugin-critical',
-      options: {
-        paths: ['/'],
-        width: 1300,
-        height: 900
-      }
-    }
-  ],
+  siteUrl: "localhost",
   templates: {
-    Products: '/product/:id',
-  }
+    Product: '/product/:id',
+  },
+  // plugins: [
+  //   {
+  //     use: '@gridsome/plugin-sitemap',
+  //     options: {
+  //       cacheTime: 600000, // default
+  //       // exclude: ['/exclude-me'],
+  //       // config: {
+  //       //   '/articles/*': {
+  //       //     changefreq: 'weekly',
+  //       //     priority: 0.5
+  //       //   },
+  //       //   '/about': {
+  //       //     changefreq: 'monthly',
+  //       //     priority: 0.7
+  //       //   }
+  //       // }
+  //     }
+  //   }
+  // ]
 }

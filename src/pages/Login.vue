@@ -18,7 +18,8 @@
                                 <v-btn :loading="loading" :disabled="disabled" color="primary" @click="login()">
                                     ورود
                                 </v-btn>
-                                <v-btn text class="px-2 py-1 mr-2 my-1" :href="this.baseUrl+ '/password/reset'">
+                                <v-btn text class="px-2 py-1 mr-2 my-1">
+                                    <!-- :href="this.baseUrl+ '/password/reset'" -->
                                     رمز عبور خود را فراموش کرده اید؟
                                 </v-btn>
                             </v-col>
@@ -66,13 +67,21 @@ export default {
                 });
                 this.disabled = true;
                 const jwt_token = response.data.access_token;
-                this.$cookie.set('jwt_token', jwt_token, 7);
+                this.$cookies.set('jwt_token', jwt_token, "7d");
                 var today = new Date();
                 var nextWeek = this.addDays(today, 6);
-                this.$cookie.set('token_expiration', nextWeek.getTime(), 7);
+                this.$cookies.set('token_expiration', nextWeek.getTime(), "7d");
                 this.type = "success";
                 this.shw_form_alert = true;
                 this.alert_msg = "با موفقیت وارد شدید. در حال انتقال به پروفایل کاربری ...";
+                this.$store.commit("snackbar_set", {
+                    "text": "شما با موفقیت وارد حساب خود شدید",
+                    "color": "success"
+                });
+                this.$store.commit("snackbar_status_set", true);
+                setTimeout(() => {
+                    this.$store.commit("snackbar_status_set", false);
+                }, 6000);
                 this.$router.push('/dashboard');
             } catch (error) {
                 this.type = "error";
